@@ -392,9 +392,10 @@ static void PrintPlist(const char *scope, const char *key, const void *buf, size
     
     data = CFDataCreate(NULL, buf, bufSize);
     if (data != NULL) {
-        propList = CFPropertyListCreateFromXMLData(NULL, data, kCFPropertyListImmutable, NULL);
+        propList = CFPropertyListCreateWithData(NULL, data, kCFPropertyListMutableContainersAndLeaves, kCFPropertyListXMLFormat_v1_0, NULL);
         if (propList != NULL) {
-            textData = CFPropertyListCreateXMLData(NULL, propList);
+            textData = CFPropertyListCreateWithData(NULL, propList, kCFPropertyListMutableContainersAndLeaves, kCFPropertyListXMLFormat_v1_0, NULL);
+
             if (textData != NULL) {
                 mutableTextData = CFDataCreateMutableCopy(NULL, 0, textData);
                 if (mutableTextData != NULL) {
